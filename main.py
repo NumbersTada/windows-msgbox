@@ -1,6 +1,8 @@
 import customtkinter as ctk
 from PIL import Image,ImageDraw,ImageFont
 
+# WARNING: this formatting is so bad bruh :sob:
+
 def drawBox(image,position,width,height,tl,bl,tr,br,xu,xd,yl,yr):
     x,y=position
     image.paste(tl,(x,y))
@@ -72,18 +74,22 @@ def drawMessageBox(title,message,buttonTitle,icon="info"):
     image.paste(icon,(13,32),icon.convert("RGBA").getchannel("A"))
     return image
 
-image=drawMessageBox("KočKoč Unmeower","KočKoč úspěšně odmňoukal systém.\nCesta ke kočce: /users/TÁĎOS/Downloads/cat1.cat","Zobrazit")
-image.save("vlásky.png")
-image=drawMessageBox("Ondros","Váš systém se zmňoukává!","Zmňoukat",icon="error")
-image.save("error.png")
+if __name__=="__main__":
+    msg="Hello! This is a program that generates images\n"\
+        "of Windows 2000 message boxes. Please download\n"\
+        "all of the images provided, because they're\n"\
+        "needed to create the final image. Use the\n"\
+        "drawMessageBox function to create a Pillow image\n"\
+        "object with the message box."
+    image=drawMessageBox("NumbersTada",msg,"OK",icon="info")
+    image.save("message.png")
+    def click(event): app.destroy()
 
-def click(event): app.destroy()
-
-app=ctk.CTk()
-cX,cY=getRectCenterCoords((app.winfo_screenwidth()//2,app.winfo_screenheight()//2),image.width,image.height)
-app.geometry(f"{image.width}x{image.height}+{cX}+{cY}")
-app.overrideredirect(True)
-ctkImage=ctk.CTkImage(image,size=(image.width,image.height))
-ctk.CTkLabel(app,text="",image=ctkImage).pack(fill="both",expand=True)
-app.bind("<Button-1>",click)
-app.mainloop()
+    app=ctk.CTk()
+    cX,cY=getRectCenterCoords((app.winfo_screenwidth()//2,app.winfo_screenheight()//2),image.width,image.height)
+    app.geometry(f"{image.width}x{image.height}+{cX}+{cY}")
+    app.overrideredirect(True)
+    ctkImage=ctk.CTkImage(image,size=(image.width,image.height))
+    ctk.CTkLabel(app,text="",image=ctkImage).pack(fill="both",expand=True)
+    app.bind("<Button-1>",click)
+    app.mainloop()
